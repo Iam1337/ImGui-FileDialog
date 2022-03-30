@@ -5,8 +5,6 @@
 	Changes by Vladimir Sigalkin
 */
 
-#pragma once
-
 #include <chrono>
 #include <string>
 #include <filesystem>
@@ -68,7 +66,7 @@ bool ImGui::FileDialog(bool* open, ImFileDialogInfo* dialogInfo)
 
 	if (ImGui::Begin(dialogInfo->title.c_str(), open))
 	{
-		if (dialogInfo->currentFiles.empty() && dialogInfo->currentDirectories.empty() || dialogInfo->refreshInfo)
+		if ((dialogInfo->currentFiles.empty() && dialogInfo->currentDirectories.empty()) || dialogInfo->refreshInfo)
 			RefreshInfo(dialogInfo);
 
 		// Draw path
@@ -313,7 +311,7 @@ bool ImGui::FileDialog(bool* open, ImFileDialogInfo* dialogInfo)
 		size_t fileNameSize = fileNameStr.size();
 
 		if (fileNameSize >= fileNameBufferSize)	fileNameSize = fileNameBufferSize - 1;
-		std::memcpy(fileNameBuffer, fileNameStr.c_str(), fileNameSize);
+		memcpy(fileNameBuffer, fileNameStr.c_str(), fileNameSize);
 		fileNameBuffer[fileNameSize] = 0;
 
 		ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth());
